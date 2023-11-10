@@ -1,1 +1,0 @@
-let my_worker=this;self.onmessage=function(s){s.ports[0].postMessage(1)};
